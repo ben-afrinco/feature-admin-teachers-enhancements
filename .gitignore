@@ -1,0 +1,47 @@
+/node_modules
+/public/build
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.env.production
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
+npm-debug.log
+yarn-error.log
+/.fleet
+/.idea
+/.nova
+/.phpunit.cache
+/.vscode
+/.zed
+/storage/pail
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Database
+/database/*.sqlite
+/database/*.sqlite-journal
+
+# Project Specific
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/
+storage/audio/*
+!storage/audio/.gitkeep
+
+# E2E Tests
+/tests-e2e/node_modules/
+/tests-e2e/test-results/
+/tests-e2e/playwright-report/
+/tests-e2e/blob-report/
+/tests-e2e/playwright/.cache/

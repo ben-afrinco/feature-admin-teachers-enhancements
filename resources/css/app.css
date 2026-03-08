@@ -1,0 +1,19 @@
+/**
+ * LingoPulse Global Styles Configuration
+ * 
+ * This file serves as the entry point for globally applicable CSS.
+ * Most component styling is handled via utility classes (Tailwind CSS),
+ * while this file manages project-wide resets and base configurations.
+ */
+@import 'tailwindcss';
+
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}

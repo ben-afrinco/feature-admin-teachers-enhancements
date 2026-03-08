@@ -1,0 +1,76 @@
+--- Global Setup: Initializing Test Environment ---
+Migration and Seeding...
+
+  Dropping all tables ...................... 4.06ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ................ 15.08ms DONE
+
+   INFO  Running migrations.  
+
+  2026_01_07_150026_create_lingopluse_system_tables  99.21ms DONE
+  2026_01_14_223712_create_cache_table .... 26.79ms DONE
+  2026_02_24_201303_create_sessions_table . 20.88ms DONE
+  2026_02_24_233115_add_ai_analysis_to_student_table  0.39ms DONE
+  2026_02_25_010000_add_class_student_and_fix_columns  29.32ms DONE
+  2026_02_26_215932_add_content_to_test_table  6.83ms DONE
+  2026_02_27_220129_create_online_sessions_table  12.86ms DONE
+  2026_02_27_224445_create_assignments_table  7.27ms DONE
+  2026_02_27_224504_create_assignment_attachments_table  6.83ms DONE
+  2026_02_27_224509_create_assignment_submissions_table  7.01ms DONE
+  2026_02_27_224512_create_submission_versions_table  7.20ms DONE
+  2026_02_27_230004_create_notifications_table  13.13ms DONE
+  2026_02_27_235750_create_grades_table .... 6.70ms DONE
+  2026_02_28_005038_create_chat_sessions_table  6.84ms DONE
+  2026_02_28_010229_create_failed_jobs_table  13.50ms DONE
+  2026_02_28_010229_create_jobs_table ..... 12.74ms DONE
+  2026_02_28_011046_add_avatar_to_user_table  7.29ms DONE
+  2026_02_28_195035_encrypt_full_name_in_user_table  38.07ms DONE
+
+
+   INFO  Seeding database.  
+
+  Database\Seeders\TestSeeder .................. RUNNING  
+  Database\Seeders\TestSeeder .............. 621 ms DONE  
+
+Environment Ready.
+
+Running 6 tests using 1 worker
+
+  ✘  1 [chromium] › tests/student/ai_test.spec.ts:11:9 › Student AI Test Workflow › should be able to navigate the full AI test (Reading, Listening, Writing, Speaking) (2.7s)
+
+
+  1) [chromium] › tests/student/ai_test.spec.ts:11:9 › Student AI Test Workflow › should be able to navigate the full AI test (Reading, Listening, Writing, Speaking) 
+
+    Test was interrupted.
+
+    Error: locator.waitFor: Test ended.
+    Call log:
+    [2m  - waiting for locator('#loginModal') to be visible[22m
+
+
+       at ../pages/LoginPage.ts:32
+
+      30 |         await this.page.locator('#nextBtn').click();
+      31 |
+    > 32 |         await this.page.locator('#loginModal').waitFor({ state: 'visible' });
+         |                                                ^
+      33 |         await this.emailInput.fill(email);
+      34 |         await this.passwordInput.fill(password);
+      35 |         await this.loginButton.click();
+        at LoginPage.login (/media/alqudimi/azoz2/Programming/php/graduation-project/tests-e2e/pages/LoginPage.ts:32:48)
+        at /media/alqudimi/azoz2/Programming/php/graduation-project/tests-e2e/tests/student/ai_test.spec.ts:7:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/student-ai_test-Student-AI-25862-Listening-Writing-Speaking--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 interrupted
+    [chromium] › tests/student/ai_test.spec.ts:11:9 › Student AI Test Workflow › should be able to navigate the full AI test (Reading, Listening, Writing, Speaking) 
+  5 did not run
+
+To open last HTML report run:
+[36m[39m
+[36m  npx playwright show-report[39m
+[36m[39m

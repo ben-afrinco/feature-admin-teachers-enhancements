@@ -1,0 +1,57 @@
+--- Global Setup: Initializing Test Environment ---
+Migration and Seeding...
+
+  Dropping all tables ...................... 3.89ms DONE
+
+   INFO  Preparing database.  
+
+  Creating migration table ................ 14.83ms DONE
+
+   INFO  Running migrations.  
+
+  2026_01_07_150026_create_lingopluse_system_tables  67.85ms DONE
+  2026_01_14_223712_create_cache_table .... 20.02ms DONE
+  2026_02_24_201303_create_sessions_table . 15.37ms DONE
+  2026_02_24_233115_add_ai_analysis_to_student_table  0.24ms DONE
+  2026_02_25_010000_add_class_student_and_fix_columns  22.90ms DONE
+  2026_02_26_215932_add_content_to_test_table  5.42ms DONE
+  2026_02_27_220129_create_online_sessions_table  11.77ms DONE
+  2026_02_27_224445_create_assignments_table  5.89ms DONE
+  2026_02_27_224504_create_assignment_attachments_table  5.46ms DONE
+  2026_02_27_224509_create_assignment_submissions_table  6.36ms DONE
+  2026_02_27_224512_create_submission_versions_table  5.91ms DONE
+  2026_02_27_230004_create_notifications_table  11.90ms DONE
+  2026_02_27_235750_create_grades_table .... 5.58ms DONE
+  2026_02_28_005038_create_chat_sessions_table  6.10ms DONE
+  2026_02_28_010229_create_failed_jobs_table  13.27ms DONE
+  2026_02_28_010229_create_jobs_table ..... 13.08ms DONE
+  2026_02_28_011046_add_avatar_to_user_table  6.95ms DONE
+  2026_02_28_195035_encrypt_full_name_in_user_table  38.10ms DONE
+
+
+   INFO  Seeding database.  
+
+  Database\Seeders\TestSeeder .................. RUNNING  
+  Database\Seeders\TestSeeder .............. 549 ms DONE  
+
+Environment Ready.
+
+Running 84 tests using 1 worker
+
+  ✓   1 [chromium] › tests/admin/dashboard.spec.ts:11:9 › Admin Dashboard Navigation › should load the dashboard correctly (16.6s)
+  ✓   2 [chromium] › tests/admin/dashboard.spec.ts:15:9 › Admin Dashboard Navigation › should navigate to Users Management panel (8.6s)
+  ✓   3 [chromium] › tests/admin/dashboard.spec.ts:21:9 › Admin Dashboard Navigation › should navigate to Classes Management panel (10.2s)
+  ✓   4 [chromium] › tests/admin/dashboard.spec.ts:26:9 › Admin Dashboard Navigation › should navigate to Content Management (Questions) panel (21.3s)
+  ✓   5 [chromium] › tests/admin/manage_classes.spec.ts:12:9 › Admin Manage Classes Workflow › should open Add Course modal (19.1s)
+  ✓   6 [chromium] › tests/admin/manage_questions.spec.ts:12:9 › Admin Manage Questions Workflow › should open Add Question modal (16.4s)
+  ✓   7 [chromium] › tests/admin/manage_users.spec.ts:12:9 › Admin Manage Users Workflow › should open Add User modal (14.0s)
+  ✓   8 [chromium] › tests/admin/manage_users.spec.ts:21:9 › Admin Manage Users Workflow › should close Add User modal via cancel (9.7s)
+  ✓   9 [chromium] › tests/auth/login.spec.ts:9:9 › Authentication & Session Management › Teacher should be able to login with valid credentials (5.7s)
+  ✓  10 [chromium] › tests/auth/login.spec.ts:18:9 › Authentication & Session Management › Admin should be able to login with valid credentials (9.0s)
+  ✓  11 [chromium] › tests/auth/login.spec.ts:26:9 › Authentication & Session Management › Should show error for invalid credentials (2.4s)
+  ✓  12 [chromium] › tests/auth/login.spec.ts:32:9 › Authentication & Session Management › Student login flow (direct registration) (2.2s)
+  ✓  13 [chromium] › tests/auth/logout.spec.ts:5:9 › Authentication - Logout › Teacher should be able to logout from dashboard (5.0s)
+  ✓  14 [chromium] › tests/public/landing.spec.ts:5:9 › Landing and Public Routes › should load the main landing page (4.2s)
+  ✓  15 [chromium] › tests/public/landing.spec.ts:13:9 › Landing and Public Routes › should load how it works page (4.1s)
+  ✓  16 [chromium] › tests/public/landing.spec.ts:18:9 › Landing and Public Routes › should load test instructions (1.9s)
+  ✘  17 [chromium] › tests/student/ai_test.spec.ts:11:9 › Student AI Test Workflow › should be able to navigate the full AI test (Reading, Listening, Writing, Speaking) (30.3s)
