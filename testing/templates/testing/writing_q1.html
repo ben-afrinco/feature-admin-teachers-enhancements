@@ -1,0 +1,16 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Writing Test</h1>
+    {% if test %}
+    <p>Topic: <strong>{{ test.content }}</strong></p>
+    <form method="POST" action="{% url 'testing:submit_writing' %}">
+        {% csrf_token %}
+        <textarea name="essay" rows="10" placeholder="Write your essay here..." required style="width:100%; border-radius:10px; padding:15px;"></textarea>
+        <button type="submit" class="btn primary" style="margin-top:20px;">Submit Essay</button>
+    </form>
+    {% else %}
+    <p>No active test found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Reading Test</h1>
+    {% if test %}
+    <p>{{ test.content|linebreaks }}</p>
+    <form method="POST" action="{% url 'testing:submit_reading' 'dynamic' %}">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class="question">
+            <p>{{ forloop.counter }}. {{ question.question_text }}</p>
+            {% for option in question.options.all %}
+            <label>
+                <input type="radio" name="q{{ question.question_id }}" value="{{ option.option_id }}" required>
+                {{ option.optione_text }}
+            </label><br>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn primary">Submit Test</button>
+    </form>
+    {% else %}
+    <p>No active test found. Please go back to instructions.</p>
+    <a href="{% url 'testing:test_instructions' %}" class="btn secondary">Instructions</a>
+    {% endif %}
+</div>
+{% endblock %}

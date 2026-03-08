@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>My Assignments</h1>
+    <ul>
+    {% for assignment in assignments %}
+        <li>
+            {{ assignment.title }} - Due: {{ assignment.due_date }}
+            <form method="POST" action="{% url 'classroom:submit_assignment' assignment.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <textarea name="content" placeholder="Your answer..."></textarea>
+                <input type="file" name="submission_file">
+                <button type="submit" class="btn primary">Submit</button>
+            </form>
+        </li>
+    {% empty %}
+        <p>No assignments found.</p>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

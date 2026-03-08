@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>New Student Registration</h1>
+    <form method="POST" action="{% url 'accounts:account_store' %}">
+        {% csrf_token %}
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <button type="submit" class="btn primary">Start Now</button>
+    </form>
+</div>
+{% endblock %}

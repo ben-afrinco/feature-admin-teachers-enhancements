@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Test Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.test.test_name }} ({{ result.test.skill }})</td>
+                <td>{{ result.final_score|floatformat:2 }}%</td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="2">No results yet.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'testing:test_instructions' %}" class="btn primary">Try Another Test</a>
+    <a href="{% url 'core:index' %}" class="btn secondary">Back home</a>
+</div>
+{% endblock %}

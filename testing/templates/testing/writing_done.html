@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Writing Test Completed</h1>
+    <p>Your essay has been submitted and evaluated by AI.</p>
+    <a href="{% url 'testing:speaking_start' %}" class="btn primary">Proceed to Speaking</a>
+</div>
+{% endblock %}
