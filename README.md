@@ -1,4 +1,4 @@
-# LingoPulse AI — Graduation Project (Django Migration)
+
 
 This project has been fully migrated from Laravel to Django. It features a modular architecture, AI-powered English proficiency assessments, and role-based dashboards.
 
