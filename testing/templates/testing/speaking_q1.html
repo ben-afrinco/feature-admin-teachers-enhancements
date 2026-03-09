@@ -1,0 +1,74 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Speaking Test</h1>
+    {% if test %}
+    <p>Read the following passage aloud:</p>
+    <p><strong id="targetPassage">{{ test.content }}</strong></p>
+
+    <button id="startRecord" class="btn primary">Start Recording</button>
+    <p id="statusDisplay">Click the button to start.</p>
+    <p id="transcriptionDisplay" style="margin-top: 20px; font-style: italic; color: #aaa;"></p>
+
+    <form id="speakingForm" method="POST" action="{% url 'testing:submit_speaking' %}">
+        {% csrf_token %}
+        <input type="hidden" name="transcription" id="transcriptionInput">
+        <input type="hidden" name="accuracy" id="accuracyInput">
+        <button type="submit" class="btn secondary" style="display:none;" id="submitBtn">Submit Recording</button>
+    </form>
+    {% else %}
+    <p>No active test found.</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const startBtn = document.getElementById('startRecord');
+    const status = document.getElementById('statusDisplay');
+    const display = document.getElementById('transcriptionDisplay');
+    const submitBtn = document.getElementById('submitBtn');
+    const transcriptInput = document.getElementById('transcriptionInput');
+    const accuracyInput = document.getElementById('accuracyInput');
+    const targetPassage = document.getElementById('targetPassage').innerText.trim().toLowerCase();
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition.continuous = false;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+
+        startBtn.onclick = () => {
+            recognition.start();
+            status.innerText = "Listening...";
+            startBtn.disabled = true;
+        };
+
+        recognition.onresult = (event) => {
+            const transcript = event.results[0][0].transcript;
+            display.innerText = "Detected: " + transcript;
+            transcriptInput.value = transcript;
+
+            // Simple client-side accuracy check
+            const words = targetPassage.split(/\s+/);
+            const detectedWords = transcript.toLowerCase().split(/\s+/);
+            let matches = 0;
+            words.forEach(w => { if (detectedWords.includes(w)) matches++; });
+            const accuracy = Math.round((matches / words.length) * 100);
+
+            accuracyInput.value = accuracy;
+            submitBtn.style.display = 'inline-block';
+            status.innerText = "Done! You can now submit.";
+            startBtn.disabled = false;
+        };
+
+        recognition.onerror = (e) => {
+            status.innerText = "Error: " + e.error;
+            startBtn.disabled = false;
+        };
+    } else {
+        status.innerText = "Speech Recognition not supported in this browser.";
+        startBtn.disabled = true;
+    }
+</script>
+{% endblock %}

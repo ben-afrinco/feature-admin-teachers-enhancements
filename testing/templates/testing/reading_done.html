@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Reading Test Completed</h1>
+    <p>Well done! You have completed the reading section.</p>
+    <a href="{% url 'testing:listening_start' %}" class="btn primary">Proceed to Listening</a>
+</div>
+{% endblock %}

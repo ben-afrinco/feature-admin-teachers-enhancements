@@ -1,0 +1,13 @@
+from django.db import models
+from accounts.models import User
+
+class ChatSession(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    role = models.CharField(max_length=50) # 'user' or 'model'
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'chat_sessions'

@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Test Instructions</h1>
+    <p>Please read the instructions carefully before starting the test.</p>
+    <a href="{% url 'testing:start_ai' %}" class="btn primary">Start AI Test</a>
+</div>
+{% endblock %}

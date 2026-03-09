@@ -1,0 +1,11 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Teacher Dashboard</h1>
+    <ul>
+    {% for class in classes %}
+        <li>{{ class.classes_name }} - {{ class.level }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

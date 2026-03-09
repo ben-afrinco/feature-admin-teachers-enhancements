@@ -1,0 +1,29 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Listening Test</h1>
+    {% if test %}
+    <audio controls>
+        <source src="{{ test.content }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <form method="POST" action="{% url 'testing:submit_listening' 'dynamic' %}">
+        {% csrf_token %}
+        {% for question in questions %}
+        <div class="question">
+            <p>{{ forloop.counter }}. {{ question.question_text }}</p>
+            {% for option in question.options.all %}
+            <label>
+                <input type="radio" name="s{{ question.question_id }}" value="{{ option.option_id }}" required>
+                {{ option.optione_text }}
+            </label><br>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <button type="submit" class="btn primary">Submit Test</button>
+    </form>
+    {% else %}
+    <p>No active test found.</p>
+    {% endif %}
+</div>
+{% endblock %}

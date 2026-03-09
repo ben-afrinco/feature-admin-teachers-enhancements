@@ -1,0 +1,8 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div class="card">
+    <h1>Speaking Test Completed</h1>
+    <p>Your recording has been analyzed and evaluated by AI.</p>
+    <a href="{% url 'testing:results' %}" class="btn primary">View My Results</a>
+</div>
+{% endblock %}
