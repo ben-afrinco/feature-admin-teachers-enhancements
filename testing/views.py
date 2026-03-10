@@ -21,10 +21,22 @@ def start_ai(request):
     if not request.user.is_authenticated:
         return redirect('accounts:login')
 
-    if testing_service.start_dynamic_test_session(request.session):
-        return redirect('testing:reading_start')
+    # Seed some session data even if generation fails so the flow can continue with static tests
+    if not testing_service.start_dynamic_test_session(request.session):
+        request.session['dynamic_tests_ready'] = False
+        reading = Test.objects.filter(skill='reading').first()
+        listening = Test.objects.filter(skill='listening').first()
+        writing = Test.objects.filter(skill='writing').first()
+        speaking = Test.objects.filter(skill='speaking').first()
 
-    request.session['dynamic_tests_ready'] = False
+        request.session['dynamic_test_ids'] = {
+            'reading': reading.test_id if reading else None,
+            'listening': listening.test_id if listening else None,
+            'writing': writing.test_id if writing else None,
+            'speaking': speaking.test_id if speaking else None,
+        }
+        request.session.modified = True
+
     return redirect('testing:reading_start')
 
 # Reading
@@ -33,8 +45,12 @@ def reading_start(request):
 
 def reading_q1(request):
     test_id = request.session.get('dynamic_test_ids', {}).get('reading')
-    if test_id:
+    if not test_id:
+        test = Test.objects.filter(skill='reading').first()
+    else:
         test = get_object_or_404(Test, test_id=test_id)
+
+    if test:
         questions = test.questions.prefetch_related('options').all()
         return render(request, 'testing/reading_q1.html', {'test': test, 'questions': questions})
     return render(request, 'testing/reading_q1.html')
@@ -60,8 +76,12 @@ def reading_done(request):
 # Listening
 def listening_start(request):
     test_id = request.session.get('dynamic_test_ids', {}).get('listening')
-    if test_id:
+    if not test_id:
+        test = Test.objects.filter(skill='listening').first()
+    else:
         test = get_object_or_404(Test, test_id=test_id)
+
+    if test:
         questions = test.questions.prefetch_related('options').all()
         return render(request, 'testing/listening_q1.html', {'test': test, 'questions': questions})
     return render(request, 'testing/listening_q1.html')
@@ -87,8 +107,12 @@ def listening_done(request):
 # Writing
 def writing_start(request):
     test_id = request.session.get('dynamic_test_ids', {}).get('writing')
-    if test_id:
+    if not test_id:
+        test = Test.objects.filter(skill='writing').first()
+    else:
         test = get_object_or_404(Test, test_id=test_id)
+
+    if test:
         return render(request, 'testing/writing_q1.html', {'test': test})
     return render(request, 'testing/writing_q1.html')
 
@@ -116,8 +140,12 @@ def writing_done(request):
 # Speaking
 def speaking_start(request):
     test_id = request.session.get('dynamic_test_ids', {}).get('speaking')
-    if test_id:
+    if not test_id:
+        test = Test.objects.filter(skill='speaking').first()
+    else:
         test = get_object_or_404(Test, test_id=test_id)
+
+    if test:
         return render(request, 'testing/speaking_q1.html', {'test': test})
     return render(request, 'testing/speaking_q1.html')
 

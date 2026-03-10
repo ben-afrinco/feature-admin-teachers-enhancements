@@ -18,7 +18,7 @@ class ExceptionHandlerMiddleware:
             'message': str(exception),
             'method': request.method,
             'path': request.get_full_path(),
-            'user_id': request.user.id if request.user.is_authenticated else None,
+            'user_id': request.user.user_id if request.user.is_authenticated else None,
             'traceback': traceback.format_exc()
         }
         logger.error(f"Unhandled Exception: {log_data}")
